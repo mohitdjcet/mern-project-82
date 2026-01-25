@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const student= 1200;
-  const name= "Mohit Kumar";
+  const [ text, setText] = useState("")
+
+  const handleFocus = () => {
+    console.log("Input field is focused");
+  }
   return (
     <>
-      <h1 className = "header">Hello, {5*8}!</h1>
-      <p>Total Student: {student}</p>
+    <input 
+    type="text" 
+    value={text}
+    onChange={(e)=>setText(e.target.value)}
+    onFocus={handleFocus}
+    onBlur={() => console.log("Input field lost focus")}
+    />
+    <p>Your Text: {text}</p>
     </>
   );
 }
