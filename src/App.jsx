@@ -1,15 +1,15 @@
 import React from "react";
-import "./App.css";
 
 function App() {
-  const student= 1200;
-  const name= "Mohit Kumar";
-  return (
-    <>
-      <h1 className = "header">Hello, {5*8}!</h1>
-      <p>Total Student: {student}</p>
-    </>
-  );
+  const isLogin = false;
+
+  return(
+    <h1>
+   {
+    isLogin || dashboard
+   }
+   </h1>
+  )
 }
 
 export default App;
