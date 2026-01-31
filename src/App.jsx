@@ -1,47 +1,112 @@
-import React, { useRef } from "react";
+// import React from 'react';
+// class App extends React.Component {
+//   state = {
+//     count: 0
+//   };
+//   componentDidMount(){
+//     console.log('App component has mounted');
+//   }
+
+//   componentDidUpdate(){
+//     console.log('App component has updated');
+//   }
+
+//   componentWillUnmount(){
+//     console.log('App component will unmount');
+//   }
+
+//   render(){
+//     return (
+//       <div>
+//         <h1>Welcome to the App</h1>
+//         <button onClick={()=> this.setState({
+//           count: this.state.count+1
+//         })}>Count : {this.state.count}</button>
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;
+
+// import { useEffect, useState } from "react";
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   // useEffect(() => {
+//   //   const timer = setInterval(() => {
+//   //     console.log("component Did Mount");
+//   //   }, 1000);
+//   //   console.log("component Did Update");
+//   //   return () => {
+//   //     clearTimeout(timer);
+//   //     console.log("component Will Unmount");
+//   //   };
+//   // },[]);
+
+//   useEffect(() => {
+//     const timer = setInterval(() => {
+//       console.log("Running");
+//     }, 1000);
+
+
+//     return () => {
+//       clearInterval(timer);
+//     };
+//   },[])
+
+//   return (
+//     <div>
+//       <h1>Welcome to the App</h1>
+//       <button onClick={() => setCount(count + 1)}>Count : {count}</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import { useEffect, useState } from "react";
 
 function App() {
-  // const inputRef = useRef(null);
+  const [count, setCount] = useState(0);
+  const [show, setShow] = useState(true);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Name:", inputRef.current.value);
-  // }
-  // const [name, setName] = useState("");
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Name:",name);
-  // }
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <input
-    //     type="text"
-    //     value={name}
-    //     onChange={(e)=> setName(e.target.value)}
-    //     />
-    //     <button type="submit">Submit</button>
-    // </form>
+    <div>
+      <h1>useEffect Cleanup Demo</h1>
 
-    // <form onSubmit={handleSubmit}>
-    //   <input type="text" ref={inputRef} />
-    //   <button type="submit">Submit</button>
-    // </form>
+      <button onClick={() => setCount(count + 1)}>
+        Count : {count}
+      </button>
 
-    // <React.Fragment>
-    //   <h1>Hello, World!</h1>
-    //   <p>Welcome</p>
-    // </React.Fragment>
+      <br /><br />
 
-   <>
-  {[1, 2, 3].map((num) => (
-    <React.Fragment key={num}>
-      <h1>Heading {num}</h1>
-      <p>This is paragraph {num}</p>
-    </React.Fragment>
-  ))}
-</>
+      <button onClick={() => setShow(!show)}>
+        {show ? "Unmount Component" : "Mount Component"}
+      </button>
 
+      <br /><br />
+
+      {show && <Timer />}
+    </div>
   );
 }
+
+function Timer() {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log("Running...");
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+      console.log("Cleanup executed ❌");
+      alert("Cleanup Function Called");
+    };
+  }, []);
+
+  return <h3>⏱ Timer Running...</h3>;
+}
+
 export default App;
