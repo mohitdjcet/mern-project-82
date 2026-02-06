@@ -1,7 +1,1 @@
-.header{
-  background-color: #0678ea;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
+@import "tailwindcss";
