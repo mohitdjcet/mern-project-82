@@ -1,15 +1,17 @@
-import React from "react";
-import "./App.css";
+import { Link, Outlet } from "react-router";
 
-function App() {
-  const student= 1200;
-  const name= "Mohit Kumar";
+export default function App() {
   return (
-    <>
-      <h1 className = "header">Hello, {5*8}!</h1>
-      <p>Total Student: {student}</p>
-    </>
+    <div>
+      <nav>
+        <Link to="/">Home</Link> <br/>
+        <Link to="/products?category=react&page=1">Products</Link><br/>
+        <Link to="/login">Login</Link><br/>
+        <Link to="/dashboard">Dashboard</Link>
+      </nav>
+
+      <hr/>
+      <Outlet />
+    </div>
   );
 }
-
-export default App;
