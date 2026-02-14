@@ -1,39 +1,39 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import api from "./api";
+import User from "./User";
+import Product from "./Product";
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [name,setName] = useState("");
 
-  useEffect(() => {
-    api.get("/users")
-    // .then(res =>{
-    //   if(!res.ok) throw new Error("API call failed");
-    //   return res.json();
-    // })
-    // .then(data => setUsers(data))
-    .then(res => setUsers(res.data))
-    .catch(err => setError(err.message))
-    .finally(() => setLoading(false));
-  },[]);
+  useEffect(()=>{
+    const savedName = localStorage.getItem("name");
+    if(savedName){
+      setName(savedName);
+    }
+  },[])
 
-  console.log(users,"users",error,"error",loading,"loading");
-  
-  if(loading) return <h1>Loading...</h1>
-  if(error) return <h1>Error: {error}</h1>
+  const saveName = () => {
+    localStorage.setItem("name",name);
+  }
 
-  return (
-    <>
-     <h1>Users(API)</h1>
-     {
-      users.map( user =>(
-        <p key={user.id}>{user.name}</p>
-      ))
-     }
-    </>
-  );
+  const clearName = () => {
+    localStorage.removeItem("name");
+    setName("");
+  }
+  return(
+    <div>
+      <h1>Local Storage Demo</h1>
+      <input value={name}
+       onChange={(e)=> setName(e.target.value)}
+       placeholder="Enter Name"
+       />
+       <button onClick={saveName}>Save</button>
+       <button onClick={clearName}>Clear</button>
+       <p>Refresh Page pr data change nhi hoga</p>
+       <User />
+       <Product />
+    </div>
+  )
 }
 
 export default App;
