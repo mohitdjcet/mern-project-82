@@ -1,15 +1,20 @@
-import React from "react";
-import "./App.css";
+import { useReducer } from "react";
+import { counterReducer, initialState} from "./reducer/counterReducer";
+import FormState from "./FormState";
 
 function App() {
-  const student= 1200;
-  const name= "Mohit Kumar";
+  const [state, dispatch] = useReducer(counterReducer, initialState);
   return (
-    <>
-      <h1 className = "header">Hello, {5*8}!</h1>
-      <p>Total Student: {student}</p>
-    </>
+    <div>
+      <h1>Count, {state.count}</h1>
+      <button onClick={() => dispatch({type: "INCREMENT"})}>+</button>
+      <button onClick={() => dispatch({type: "DECREMENT"})}>-</button>
+      <button onClick={() => dispatch({type: "RESET"})}>Reset</button>
+      <FormState />
+    </div>
   );
 }
 
 export default App;
+
+//UI -> dispatch(action) -> reducer(state, action) -> newSate -> UI Update
