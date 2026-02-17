@@ -1,15 +1,15 @@
-import React from "react";
-import "./App.css";
+import { Link, Outlet } from "react-router";
 
-function App() {
-  const student= 1200;
-  const name= "Mohit Kumar";
+export default function App() {
   return (
-    <>
-      <h1 className = "header">Hello, {5*8}!</h1>
-      <p>Total Student: {student}</p>
-    </>
-  );
+    <div>
+      <nav>
+        <Link to="/">Home</Link>{" | "}
+        <Link to="/dashboard">Dashboard</Link>{" | "}
+        <Link to="/settings">Settings</Link>{" | "}
+      </nav>
+      <hr />
+      <Outlet />
+    </div>
+  )
 }
-
-export default App;
